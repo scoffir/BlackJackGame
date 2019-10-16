@@ -19,6 +19,23 @@ namespace BlackJackGame.Tests.Models
             Assert.IsType<BlackJackCard>(_deck.Draw());
         }
 
+        [Fact]
+        public void NewDeck_Created52Cards()
+        {
+            
+            int count = 0;
+            while(_deck.Draw() != null)
+            {
+                Assert.False(_deck.Draw().FaceUp);
+                count++;
+            }
+            Assert.Equal(52, count);
+        }
 
+        [Fact]
+        public void Draw_DrawsFromEmptyStack_ThrowsException()
+        {
+            Assert.Throws<InvalidOperationException>(() => _deck.Draw());
+        }
     }
 }
