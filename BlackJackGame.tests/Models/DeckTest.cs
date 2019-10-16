@@ -22,19 +22,32 @@ namespace BlackJackGame.Tests.Models
         [Fact]
         public void NewDeck_Created52Cards()
         {
-            
-            int count = 0;
-            while(_deck.Draw() != null)
+            BlackJackCard card;
+            int[] suits = new int[4];
+            int[] faceValues = new int[13];
+            for (int i = 1; i <= 52; i++)
             {
-                Assert.False(_deck.Draw().FaceUp);
-                count++;
+                card = _deck.Draw();
+                suits[(int)card.Suit - 1]++;
+                faceValues[(int)card.FaceValue - 1]++;
             }
-            Assert.Equal(52, count);
+            for (int i = 0; i < 4; i++)
+            {
+                Assert.Equal(13, suits[i]);
+            }
+            for (int i = 0; i < 13; i++)
+            {
+                Assert.Equal(4, faceValues[i]);
+            }
         }
 
         [Fact]
         public void Draw_DrawsFromEmptyStack_ThrowsException()
         {
+            for(int i = 0; i < 52; i++)
+            {
+                _deck.Draw();
+            }
             Assert.Throws<InvalidOperationException>(() => _deck.Draw());
         }
     }

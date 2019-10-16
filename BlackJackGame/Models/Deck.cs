@@ -40,6 +40,7 @@ namespace BlackJackGame.Models
                 _cards[k] = _cards[n];
                 _cards[n] = value;
             }
+        }
         #endregion
     }
 }
