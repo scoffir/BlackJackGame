@@ -26,9 +26,12 @@ namespace BlackJackGame.Tests.Models
             Assert.Equal(1, _aHand.NrOfCards);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void AddCard_AHandWithCards_AddsACard()
         {
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Ace));
+            _aHand.AddCard(new BlackJackCard(Suit.Diamonds, FaceValue.Ace));
+            Assert.Equal(2, _aHand.NrOfCards);
         }
 
         [Fact]
@@ -44,34 +47,56 @@ namespace BlackJackGame.Tests.Models
                 Assert.True(c.FaceUp);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void Value_EmptyHand_IsZero()
         {
+            Assert.Equal(0, _aHand.Value);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void Value_HandWith6and5_Is11()
         {
-         }
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Five));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Six));
+            _aHand.TurnAllCardsFaceUp();
+            Assert.Equal(11, _aHand.Value);
+        }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void Value_HandWith5AndKing_Is15()
         {
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Five));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.King));
+            _aHand.TurnAllCardsFaceUp();
+            Assert.Equal(15, _aHand.Value);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void Value_HandWithCardsFacingDown_DoesNotAddValuesOfCardsFacingDown()
         {
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Five));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Six));
+            Assert.Equal(0, _aHand.Value);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void Value_HandWithAceAndNotExceeding21_TakesAceAs11()
         {
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Ace));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.King));
+            _aHand.TurnAllCardsFaceUp();
+            Assert.Equal(21, _aHand.Value);
         }
 
-        [Fact(Skip = "Not yet implemented")]
+        [Fact]
         public void ValueHandWithAceAndExceeding21_TakesAceAs1()
         {
+
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.King));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.King));
+            _aHand.AddCard(new BlackJackCard(Suit.Clubs, FaceValue.Ace));
+            _aHand.TurnAllCardsFaceUp();
+            Assert.Equal(21, _aHand.Value);
         }
 
         [Fact]
