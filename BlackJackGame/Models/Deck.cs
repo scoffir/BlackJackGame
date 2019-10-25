@@ -18,6 +18,7 @@ namespace BlackJackGame.Models
             foreach (var faceValue in Enum.GetValues(typeof(FaceValue)))
                 foreach (var suit in Enum.GetValues(typeof(Suit)))
                     _cards.Add(new BlackJackCard((Suit)suit, (FaceValue)faceValue));
+            //Shuffle();
         }
 
         public BlackJackCard Draw()
